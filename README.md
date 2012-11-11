@@ -1,11 +1,23 @@
 MultiUsrSideNotes
 =================
 
-A LaTex package allowing several users to put side notes in a paper, e.g. for reviewing purpose. A login-like procedure allows different author notes to be distinguished by tags and colors.
+A LaTex package allowing *several users* to put *side notes* in a paper, e.g. for reviewing purpose. A *login-like procedure* allows authors to distinguish their notes by tags and colors. One can consider the attached ```MultiUsrSideNotes_Guide_and_example.tex``` as a reference.
 
 USAGE: 
 ----------------
-Login phase - to be put in the header of the document before `\begin{document}`
+**Dependencies:**
+```latex
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox}
+```
+
+**Inclusion and activation**: after including the package, it must be manually enabled; if not, side notes will not appear in the final document. 
+```latex
+\usepackage{MultiUsrSideNotes} 	%inclusion
+\settoggle{SnShowNotes}{true}	%activation - false to disable
+```
+
+**Login**: to be put in the header of the document before `\begin{document}`
 
 ```latex
 \SnNewUserID[a]{b}{c}
@@ -14,7 +26,7 @@ Login phase - to be put in the header of the document before `\begin{document}`
 %c -> NameOfTheCommandToMakeANewNote e.g. ACNote
 ```
 
-Example:
+*Example*:
 ```latex
 \SnNewUserID[*]{AC}{ACNote}
 %generates the LaTex command `\ACNote{<myNote>}`. 
@@ -22,7 +34,15 @@ Example:
 %`*` owing to the user whose initials are `AC`.
 ```
 
-Up to six users are supported so far. The colors distinguishing their notes, which are assinged according to login order, are 
+**Use**:
+```latex
+\ACNote{Hey, this is my side note.}
+%Put a side note whose content is "Hey, this is my side note."
+```
+
+Notes:
+----------------
+Up to six users are supported so far. The colors distinguishing their notes, which are assinged following the login order, are 
 ```latex
 % (from MultiUsrSideNotes.sty)
 \SnAddColor{yellow}
