@@ -1,0 +1,166 @@
+%%
+%% Copyright (C) 2012 by Alessandro Corbetta <alessandro.corbetta@hotmail.com>.
+%%
+%% This file may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either
+%% version 1.2 of this license or (at your option) any later
+%% version.  The latest version of this license is in:
+%%
+%%     http://www.latex-project.org/lppl.txt
+%%
+%% and version 1.2 or later is part of all distributions of
+%% LaTeX version 1999/12/01 or later.
+%%
+%% Currently this work has the LPPL maintenance status "maintained".
+%%
+%% The Current Maintainer of this work is Alessandro Corbetta <alessandro.corbetta@hotmail.com>.
+%%
+%% This work consists of the file MultiUsrSideNotes.sty 
+%% 
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\ProvidesPackage{MultiUsrSideNotes}
+  [2012/09/21 v0.04 LaTeX package for multi-user side reviewing notes]
+
+%%%%%% USAGE: \SnNewUserID[UserDistinguishing char, e.g. °, default = *]{UserInitial e.g. AC}{NameOfTheCommandToMakeANewNote e.g. ACNote (without\)}
+%%%%%% 
+%%%%%%
+%%%%%% BEGIN:
+\RequirePackage{xcolor}
+\RequirePackage{etoolbox}
+\RequirePackage{marginnote}
+\usepackage{ifthen}
+
+\newtoggle{SnShowNotes}
+\settoggle{SnShowNotes}{true} %% this makes the magic.. :)
+
+\newcommand{\SnCfbox}[2]{%	%Color box macro
+    \colorlet{currentcolor}{.}%
+    {\color{#1}%
+    \fbox{\color{currentcolor}#2}}%
+}
+
+\newcounter{SnStoredColors}%	Counter for saved colors
+\newcommand{\SnStoredColorsVal}{\alph{SnStoredColors}}
+\newcommand{\SnStoredColIDName}{SnStoredColID}
+
+\newcommand{\SnAddColor}[1]{%	Adds a color in the array
+  \stepcounter{SnStoredColors}%
+  \expandafter\newcommand\csname \SnStoredColIDName\SnStoredColorsVal\endcsname{%
+    #1%
+  }%
+}
+
+%%colors are: SnStoredColIDa, SnStoredColIDb, SnStoredColIDc....
+
+%%Color array
+\SnAddColor{yellow}
+\SnAddColor{blue}
+\SnAddColor{green}
+\SnAddColor{gray}
+\SnAddColor{red}
+\SnAddColor{pink}
+%\SnAddColor{red}
+
+
+\newcommand{\SnRightmarginpar}[1]{\marginpar{#1}}
+%% note parameters:
+\newcommand{\SnCboxSize}{1.2in}
+\newcommand{\SnNegativeBoxOffSet}{-2.5ex}
+\newcommand{\SnNegativeBoxOffSetBelow}{2ex}
+
+\newcommand{\NoteApex}[2]{\textsuperscript{#1\arabic{#2}}}
+
+%% Note generator with fixed color 
+\newcommand{\NoteGen}[4]{%
+	\stepcounter{#1}%
+  \NoteApex{#2}{#1}\marginpar{%
+		\vspace{\SnNegativeBoxOffSet}%
+		\SnCfbox{yellow}{%
+			\parbox[b]{\SnCboxSize}{%
+				\footnotesize{\NoteApex{#2}{#1}\textit{#3}: #4}%
+			}%
+		}%
+		\vspace{\SnNegativeBoxOffSetBelow}%
+	}%
+} %loving latex.. ;)
+
+%% Note generator with color dependence
+\newcommand{\NoteGenCol}[5]{%
+\iftoggle{SnShowNotes}{%
+	\stepcounter{#1}%
+  %\SnCfbox{#5}{\parbox{.5ex}{\NoteApex{#2}{#1}}}\marginpar{%
+  \NoteApex{#2}{#1}\SnRightmarginpar{%
+		\vspace{\SnNegativeBoxOffSet}%
+		\SnCfbox{#5}{%
+			\parbox[b]{\SnCboxSize}{%
+				\footnotesize{\NoteApex{#2}{#1}\textit{#3}: #4}%
+			}%
+		}%
+		\vspace{\SnNegativeBoxOffSetBelow}%
+	}%
+}{}%
+} %loving latex.. ;)
+
+%Tags to join with names
+\newcommand{\SnCounterSTR}{CNTCNT} %% User counter tag
+\newcommand{\SnUserSymbolSTR}{SYMSYM}
+
+\newcommand{\SnNewUserIDcounter}[1]{\newcounter{#1\SnCounterSTR}}
+\newcommand{\SnNewNote}[4]{\NoteGenCol{#1\SnCounterSTR}{#3}{#1}{#2}{#4}}
+\newcounter{SnTotUsersCount}
+
+\newcommand{\SnCurUserColor}{SnCurUserColorPrf}
+\newcommand{\reproduce}[1]{#1}
+\newcommand{\SnNewUserID}[3][*]{%
+      \stepcounter{SnTotUsersCount}
+      %\expandafter\edef\localcol{\csname\SnStoredColIDName\alph{SnTotUsersCount}\endcsname}
+      \expandafter\edef\csname\SnCurUserColor#2\endcsname{\expandafter\reproduce\csname\SnStoredColIDName\alph{SnTotUsersCount}\endcsname}
+      \SnNewUserIDcounter{#2}%
+      \expandafter\newcommand\csname #3\endcsname[1]{%
+	  \expandafter\SnNewNote{#2}{##1}{#1}{\csname\SnCurUserColor#2\endcsname}% it can be \SnStoredColIDc (for yellow)
+      }%
+      %\expandafter\newcommand\csname #1\SnUserSymbolSTR\endcsname{
+%	  #3
+%      }
+}%
+
+%Allows to set own color
+\newcommand{\SnNewUserIDcol}[4][*]{%
+      \stepcounter{SnTotUsersCount}
+      %\expandafter\edef\localcol{\csname\SnStoredColIDName\alph{SnTotUsersCount}\endcsname}
+      \expandafter\newcommand\csname\SnCurUserColor#2\endcsname{\csname\SnStoredColIDName#4\endcsname}
+      \SnNewUserIDcounter{#2}%
+      \expandafter\newcommand\csname #3\endcsname[1]{%
+	  \expandafter\SnNewNote{#2}{##1}{#1}{\csname\SnCurUserColor#2\endcsname}% it can be \SnStoredColIDc (for yellow)
+      }%
+      %\expandafter\newcommand\csname #1\SnUserSymbolSTR\endcsname{
+%	  #3
+%      
+}%
+
+
+%%% Experimental stuff from now on..
+
+\newenvironment{myindentpar}[1]%
+ {\begin{list}{}%
+         {\setlength{\leftmargin}{#1}}%
+         \item[]%
+ }
+ {\end{list}}
+
+
+\newcommand{\twoversionsNL}[2]{#1 
+
+\iftoggle{SnShowNotes}{%
+\begin{myindentpar}{1cm}%
+\small{\textcolor{gray}{#2}}%
+\end{myindentpar}%
+}{}%
+}
+
+%%%%%%%%%%%
+%%%%%%%%%%% MACRO ENDS
+%%%%%%%%%%% 
+\endinput
+%%
+%% End of file 'MultiUsrSideNotes.sty'.
