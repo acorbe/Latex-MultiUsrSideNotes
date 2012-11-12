@@ -5,6 +5,10 @@ A LaTeX package allowing *several users* to put *side notes* in a paper, e.g. fo
 A *login-like procedure* allows authors to distinguish their notes by tags and colors. 
 One may want consider the attached file ```MultiUsrSideNotes_Guide_and_example.tex``` as a reference.
 
+Demo:
+
+![Little demo](https://raw.github.com/acorbe/Latex-MultiUsrSideNotes/master/MultiUsrSideNotes_Guide_and_example.png)
+
 USAGE: 
 ----------------
 **Required packages:** [*xcolor*](http://www.ctan.org/tex-archive/macros/latex/contrib/xcolor), [*etoolbox*](http://www.ctan.org/tex-archive/macros/latex/contrib/etoolbox).
