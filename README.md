@@ -27,7 +27,7 @@ the following syntax
 
 -   `b` -> User initials, e.g. AC
 
--   `c` -> Keyword which makes new notes owing to the current user, e.g. ACNote
+-   `c` -> Keyword which generates new notes owing to the current user, e.g. ACNote
 
 
 *Example*:
