@@ -34,8 +34,10 @@ the following syntax
 ```latex
 \SnNewUserID[*]{AC}{ACNote}
 ```
-generates the LaTex command `\ACNote{<myNote>}`. When called, it generates a side notes marked by 
-`*` owing to the user whose initials are `AC`.
+generates the LaTex command `\ACNote{<myNote>}`. 
+
+When called, it inserts a yellowish side note, marked by 
+`*` and owing to the user whose initials are `AC`.
 
 **Making a note**: The previously generated command `c` can be used to insert a new side note.
 
