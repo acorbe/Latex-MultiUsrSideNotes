@@ -17,32 +17,35 @@ if not, side notes *will not appear* in the final document.
 \settoggle{SnShowNotes}{true}	  %activation - false to disable
 ```
 
-**Login**: to be put in the header of the document, i.e. before `\begin{document}`
+**Login**: login command must be put in the header of the document, i.e. before `\begin{document}` according to
+the following syntax
 
 ```latex
 \SnNewUserID[a]{b}{c}
-%a -> UserDistinguishing char, e.g. °, default = *
-%b -> UserInitial e.g. AC
-%c -> NameOfTheCommandToMakeANewNote e.g. ACNote
 ```
+-   `a` -> User Distinguishing tag; single char e.g. °, default = *
+
+-   `b` -> User initials, e.g. AC
+
+-   `c` -> Keyword which makes new notes owing to the current user, e.g. ACNote
+
 
 *Example*:
 ```latex
 \SnNewUserID[*]{AC}{ACNote}
-%generates the LaTex command `\ACNote{<myNote>}`. 
-%When called it generates a side notes marked by 
-%`*` owing to the user whose initials are `AC`.
 ```
+generates the LaTex command `\ACNote{<myNote>}`. When called, it generates a side notes marked by 
+`*` owing to the user whose initials are `AC`.
 
-**Use**:
+**Making a note**: The previously generated command `c` can be used to insert a new side note.
+
+*Example*:
 ```latex
 \ACNote{Hey, this is my side note.}
-%Put a side note whose content is "Hey, this is my side note."
 ```
+inserts a side note whose content is "Hey, this is my side note."
 
-**Notes:**
-
-Up to six users are supported so far. The colors distinguishing their notes, which are assinged following the login order, are 
+**Remarks:** Up to six users are supported so far. The colors distinguishing their notes, which are assinged following the login order, are 
 ```latex
 % (from MultiUsrSideNotes.sty)
 \SnAddColor{yellow}
