@@ -7,21 +7,17 @@ One may want consider the attached file ```MultiUsrSideNotes_Guide_and_example.t
 
 USAGE: 
 ----------------
-**Dependencies:**
-```latex
-% (from MultiUsrSideNotes.sty)
-\RequirePackage{xcolor}
-\RequirePackage{etoolbox}
-```
+**Required packages:** [*xcolor*](http://www.ctan.org/tex-archive/macros/latex/contrib/xcolor), [*etoolbox*](http://www.ctan.org/tex-archive/macros/latex/contrib/etoolbox).
 
-**Inclusion and activation**: after including the package, it must be explicitly enabled; 
+
+**Inclusion and activation**: after inclusion the package must be explicitly enabled; 
 if not, side notes *will not appear* in the final document. 
 ```latex
 \usepackage{MultiUsrSideNotes} 	%inclusion
 \settoggle{SnShowNotes}{true}	  %activation - false to disable
 ```
 
-**Login**: to be put in the header of the document before `\begin{document}`
+**Login**: to be put in the header of the document, i.e. before `\begin{document}`
 
 ```latex
 \SnNewUserID[a]{b}{c}
