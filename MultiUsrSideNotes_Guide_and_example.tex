@@ -5,11 +5,14 @@
 \settoggle{SnShowNotes}{true}
 
 \SnNewUserID[*]{AC}{ACNote}
-\SnNewUserID[\#]{GC}{GCNote}
+\SnNewUserID[``]{GC}{GCNote}
+\SnNewUserID[@]{JJ}{JJNote}
 
 %opening
 \title{\texttt{MultiUsrSideNotes}: example and guide}
-\author{Alessandro Corbetta}
+\author{Alessandro Corbetta\\
+\texttt{alessandro.corbetta@hotmail.com}}
+\date{\today}
 
 \begin{document}
 
@@ -25,6 +28,7 @@ Fusce iaculis accumsan sem. Cras\GCNote{Hey, this is a note by Giovanni Corbetta
 molestie ligula a lectus dictum egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 Vivamus eu magna nisl, nec scelerisque diam. Nunc porttitor facilisis sapien,%
 \ACNote{Another note by Alessandro Corbetta!}  %%NOTE IN THIS LINE 
-lacinia fringilla libero pellentesque nec.
+lacinia fringilla libero pellentesque nec\JJNote{Note by a third user!}.%
+
 
 \end{document}
