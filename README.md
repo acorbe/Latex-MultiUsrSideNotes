@@ -21,7 +21,7 @@ if not, side notes *will not appear* in the final document.
 \settoggle{SnShowNotes}{true}	  %activation - false to disable
 ```
 
-**Login**: login command must be put in the header of the document, i.e. before `\begin{document}` according to
+**Login**: login command must be put in the header of the document, i.e. before `\begin{document}`, according to
 the following syntax
 
 ```latex
