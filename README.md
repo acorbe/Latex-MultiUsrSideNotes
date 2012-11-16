@@ -25,13 +25,13 @@ if not, side notes *will not appear* in the final document.
 the following syntax
 
 ```latex
-\SnNewUserID[a]{b}{c}
+\SnNewUserID[tag]{initials}{command}
 ```
--   `a` -> User Distinguishing tag; single char e.g. °, default = *
+-   `tag` -> User Distinguishing tag; single char e.g. °, default = *
 
--   `b` -> User initials, e.g. AC
+-   `initials` -> User initials, e.g. AC
 
--   `c` -> Keyword which generates new notes owing to the current user, e.g. ACNote
+-   `command` -> Keyword which generates new notes owing to the current user, e.g. ACNote
 
 
 *Example*:
@@ -43,7 +43,7 @@ generates the LaTex command `\ACNote{<myNote>}`.
 When called, it inserts a yellowish side note, marked by 
 `*` and owing to the user whose initials are `AC`.
 
-**Making a note**: The previously generated command `c` can be used to insert a new side note.
+**Making a note**: The previously generated command `command` can be used to insert a new side note.
 
 *Example*:
 ```latex
