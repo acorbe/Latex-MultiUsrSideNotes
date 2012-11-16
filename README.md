@@ -17,8 +17,8 @@ USAGE:
 **Inclusion and activation**: after inclusion the package must be explicitly enabled; 
 if not, side notes *will not appear* in the final document. 
 ```latex
-\usepackage{MultiUsrSideNotes} 	%inclusion
-\settoggle{SnShowNotes}{true}	  %activation - false to disable
+\usepackage{MultiUsrSideNotes} 	    %inclusion
+\settoggle{SnShowNotes}{true}	    %activation - false to disable
 ```
 
 **Login**: login command must be put in the header of the document, i.e. before `\begin{document}`, according to
